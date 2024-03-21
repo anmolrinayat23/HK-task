@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="/stylesheets/addtask.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Task</h1>
+        <form action="/addtask" method="POST">
+            <label for="user">Select User:</label>
+            <select name="user" id="user">
+                <% users.forEach(user => { %>
+                    <option value="<%= user.id %>"><%= user.name %></option>
+                <% }); %>
+            </select>
+            <br>
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" name="taskName" required>
+            <br>
+            <label for="taskType">Task Type:</label>
+            <select name="taskType" id="taskType" required>
+                <option value="Pending">Pending</option>
+                <option value="Done">Done</option>
+            </select>
+            <br>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+</body>
+</html>

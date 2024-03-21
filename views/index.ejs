@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Input Form</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+ 
+</head>
+
+<body>
+  <div class="container">
+    <h1>User Input Form</h1>
+    <form action="/adduser" method="POST" onsubmit="return validateForm()">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <span id="nameError" class="error"></span>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+      <div>
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" maxlength="10" required>
+        <span id="mobileError" class="error"></span>
+      </div>
+      <button type="submit">Submit</button>
+
+
+    </form>
+
+    <br>
+    <form action="/getuser">
+      <button type="submit">Add Task</button>
+
+    </form>
+    <br>
+    <form action="/tasks">
+      <button type="submit">Get All Task</button>
+    </form>
+    <br>
+
+    <form action="/excel">
+
+      <button type="submit">Download excel file</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var mobile = document.getElementById('mobile').value;
+
+      // Name validation
+      var nameRegex = /^[a-zA-Z\s]+$/;
+      if (!nameRegex.test(name)) {
+        document.getElementById('nameError').innerText = 'Name can only contain letters and spaces';
+        return false;
+      } else {
+        document.getElementById('nameError').innerText = '';
+      }
+
+      // Email validation
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerText = 'Invalid email format';
+        return false;
+      } else {
+        document.getElementById('emailError').innerText = '';
+      }
+
+      // Mobile number validation
+      if (mobile.length !== 10) {
+        document.getElementById('mobileError').innerText = 'Mobile number must be a 10-digit integer';
+        return false;
+      } else {
+        document.getElementById('mobileError').innerText = '';
+      }
+
+      return true;
+    }
+  </script>
+</body>
+
+</html>

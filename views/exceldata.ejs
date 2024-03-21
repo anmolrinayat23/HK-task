@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Users and Tasks</title>
+    <link rel="stylesheet" href="../public/stylesheets/excel.css">
+   
+</head>
+<body>
+    <button id="exportButton">Export Users and Tasks</button>
+
+    <script>
+        document.getElementById('exportButton').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/export');
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'users_and_tasks.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    console.error('Export request failed:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Export request failed:', error.message);
+            }
+        });
+    </script>
+</body>
+</html>
